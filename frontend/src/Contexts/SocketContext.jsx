@@ -5,7 +5,9 @@ const SocketContext = React.createContext();
 
 export const SocketProvider = ({children}) => {
 
-    const socket = io('https://incorrect-tribal-tactics-mailto.trycloudflare.com');
+    const apiUrl = import.meta.env.VITE_API_URL;
+
+    const socket = io(apiUrl);
 
     
     return (
