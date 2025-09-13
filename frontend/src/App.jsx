@@ -1,19 +1,20 @@
-import React, {useRef} from 'react'
-import './App.css'
+import React from 'react'
+import Home from './Components/Home.jsx'
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import Room from './Components/Room.jsx'
+import { SocketProvider } from './Contexts/SocketContext.jsx'
 
-function App() {
-  const videoRef = useRef();
-
-  navigator.mediaDevices.getUserMedia({ video: true })
-    .then(stream => {
-      videoRef.current.srcObject = stream;
-    });
+const App = () => {
 
   return (
-    <>
-      <video autoPlay playsInline ref={videoRef} />
-    </>
+    <SocketProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/room/:id" element={<Room />} />
+        </Routes>
+      </Router>
+    </SocketProvider>
   )
 }
-
 export default App
